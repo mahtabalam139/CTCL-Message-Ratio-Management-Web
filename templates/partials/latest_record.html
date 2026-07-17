@@ -1,0 +1,156 @@
+
+<div class="card shadow-sm">
+
+    <div class="card-header bg-primary text-white">
+
+        <h5 class="mb-0">
+
+            Latest Active Record
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if latest %}
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <table class="table table-bordered table-sm">
+
+                    <tr>
+                        <th width="35%">Environment</th>
+                        <td>{{ latest["Env"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Exchange</th>
+                        <td>{{ latest["Exchange"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Location</th>
+                        <td>{{ latest["Location"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Dedicated</th>
+                        <td>{{ latest["Dedicated"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>System</th>
+                        <td>{{ latest["System"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Server IP</th>
+                        <td>{{ latest["Server IP"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Exchange IP</th>
+                        <td>{{ latest["Exchange IP"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Dealer ID</th>
+                        <td>{{ latest["Dealer ID"] }}</td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <table class="table table-bordered table-sm">
+
+                    <tr>
+                        <th width="35%">Rack</th>
+                        <td>{{ latest["Rack"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Scenario</th>
+                        <td>{{ latest["Scenario"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>CM Msg</th>
+                        <td>{{ latest["CM Msgs"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>FO Msg</th>
+                        <td>{{ latest["Fo Msgs"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>CD Msg</th>
+                        <td>{{ latest["CD Msgs"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Msg Line</th>
+                        <td>{{ latest["Msg Line"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Start Date</th>
+                        <td>{{ latest["Start Date"] }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>End Date</th>
+                        <td>{{ latest["End Date"] }}</td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <hr>
+
+        <h6>
+
+            Comments
+
+        </h6>
+
+        <div class="alert alert-light mb-0">
+
+            {{ latest["Comments"] }}
+
+        </div>
+        <div class="mt-3 text-end">
+
+            <a href="/revision/{{ latest['id'] }}"
+            class="btn btn-warning">
+
+                <i class="bi bi-pencil-square"></i>
+
+                Revision
+
+            </a>
+
+        </div>
+
+        {% else %}
+
+        <div class="alert alert-warning mb-0">
+
+            No Active Record Found.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>

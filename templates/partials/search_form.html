@@ -1,0 +1,104 @@
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+
+        <h5 class="mb-0">
+
+            Search Records
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <form action="/search" method="post">
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <label class="form-label">
+
+                        Search By
+
+                    </label>
+
+                    <select
+                        class="form-select"
+                        name="search_type">
+
+                        <option
+                            value="Exchange IP"
+                            {% if search_type == "Exchange IP" %}selected{% endif %}>
+
+                            Exchange IP
+
+                        </option>
+
+                        <option
+                            value="Dealer ID"
+                            {% if search_type == "Dealer ID" %}selected{% endif %}>
+
+                            Dealer ID
+
+                        </option>
+
+                        <option
+                            value="FO CTCL"
+                            {% if search_type == "FO CTCL" %}selected{% endif %}>
+
+                            FO CTCL
+
+                        </option>
+
+                        <option
+                            value="CM CTCL"
+                            {% if search_type == "CM CTCL" %}selected{% endif %}>
+
+                            CM CTCL
+
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-7">
+
+                    <label class="form-label">
+
+                        Search Value
+
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="search_value"
+                        value="{{ search_value }}"
+                        placeholder="Enter Search Value"
+                        required>
+
+                </div>
+
+                <div class="col-md-2 d-flex align-items-end">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary w-100">
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

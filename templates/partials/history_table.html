@@ -1,0 +1,90 @@
+
+<div class="card shadow-sm">
+
+    <div class="card-header bg-secondary text-white">
+
+        <h5 class="mb-0">
+
+            Revision History
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if history %}
+
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-hover table-sm align-middle">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th>Scenario</th>
+
+                        <th>CM Msg</th>
+
+                        <th>FO Msg</th>
+
+                        <th>CD Msg</th>
+
+                        <th>Msg Line</th>
+
+                        <th>Start Date</th>
+
+                        <th>End Date</th>
+
+                        <th>Comments</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for row in history %}
+
+                    <tr>
+
+                        <td>{{ row["Scenario"] }}</td>
+
+                        <td>{{ row["CM Msgs"] }}</td>
+
+                        <td>{{ row["Fo Msgs"] }}</td>
+
+                        <td>{{ row["CD Msgs"] }}</td>
+
+                        <td>{{ row["Msg Line"] }}</td>
+
+                        <td>{{ row["Start Date"] }}</td>
+
+                        <td>{{ row["End Date"] }}</td>
+
+                        <td>{{ row["Comments"] }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="alert alert-info mb-0">
+
+            No Revision History Found.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>

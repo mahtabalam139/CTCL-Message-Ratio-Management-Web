@@ -1,0 +1,90 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row justify-content-center mt-5">
+
+        <div class="col-md-5">
+
+            <div class="card shadow">
+
+                <div class="card-header text-center">
+
+                    <h3>
+                        CTCL Message Ratio
+                    </h3>
+
+                    <p class="mb-0">
+                        Management Tool
+                    </p>
+
+                </div>
+
+                <div class="card-body">
+                    {% if error %}
+
+                <div class="alert alert-danger">
+
+                    {{ error }}
+
+                </div>
+
+                {% endif %}
+
+                    <form method="post">
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Username
+
+                            </label>
+
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="username"
+                                required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Password
+
+                            </label>
+
+                            <input
+                                class="form-control"
+                                type="password"
+                                name="password"
+                                required>
+
+                        </div>
+
+                        <button
+                            class="btn btn-primary w-100">
+
+                            Login
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

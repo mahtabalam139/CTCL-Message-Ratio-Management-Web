@@ -1,0 +1,178 @@
+
+{% if error %}
+
+<div class="alert alert-danger">
+
+    {{ error }}
+
+</div>
+
+{% endif %}
+<div class="card shadow-sm">
+
+    <div class="card-header bg-warning">
+
+        <h5 class="mb-0">
+
+            Revision
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+            <form
+                method="post"
+                action="/revision/{{ record['id'] }}"
+            >
+
+            <input
+                type="hidden"
+                name="record_id"
+                value="{{ record['id'] }}"
+            >
+
+            <div class="row">
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Scenario
+
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        name="scenario"
+                        value="{{ record['Scenario'] }}"
+                    >
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <label class="form-label">
+
+                        Msg Line
+
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="msg_line"
+                        name="msg_line"
+                        value="{{ record['Msg Line'] }}"
+                        readonly
+                    >
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+
+                        CM Msg
+
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="cm_msg"
+                        name="cm_msg"
+                        value="{{ record['CM Msgs'] }}"
+                    >
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+
+                        FO Msg
+
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="fo_msg"
+                        name="fo_msg"
+                        value="{{ record['Fo Msgs'] }}"
+                    >
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <label class="form-label">
+
+                        CD Msg
+
+                    </label>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="cd_msg"
+                        name="cd_msg"
+                        value="{{ record['CD Msgs'] }}"
+                    >
+
+                </div>
+
+            </div>
+
+            <br>
+
+            <label class="form-label">
+
+                Comments
+
+            </label>
+
+            <textarea
+                class="form-control"
+                rows="4"
+                name="comments"
+            >{{ record['Comments'] }}</textarea>
+
+            <br>
+
+            <div class="text-end">
+
+                <a
+                    href="/search"
+                    class="btn btn-secondary"
+                >
+
+                    Cancel
+
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn btn-warning"
+                >
+
+                    Preview
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

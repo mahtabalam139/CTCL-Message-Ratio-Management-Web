@@ -1,0 +1,54 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="row">
+
+        <div class="col-lg-12">
+
+            <h3 class="mb-3">
+
+                Search CTCL Records
+
+            </h3>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-12">
+
+            {% include "partials/search_form.html" %}
+
+        </div>
+
+    </div>
+
+    <div class="row mt-4">
+
+        <div class="col-lg-12">
+
+            {% include "partials/latest_record.html" %}
+
+        </div>
+
+    </div>
+
+    <div class="row mt-4">
+
+        <div class="col-lg-12">
+
+            {% include "partials/history_table.html" %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
