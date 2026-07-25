@@ -578,6 +578,48 @@ def user_exists(username):
     connection.close()
 
     return count > 0
+
+# ==========================================================
+# GET ALL CTCL RECORDS
+# ==========================================================
+
+def get_all_ctcl_records():
+
+    connection, cursor = get_cursor()
+
+    cursor.execute("""
+        SELECT
+            id,
+            env,
+            exchange_name,
+            location,
+            dedicated,
+            system_name,
+            server_ip,
+            exchange_ip,
+            fo_ctcl,
+            cm_ctcl,
+            cds_ctcl,
+            dealer_id,
+            rack,
+            scenario,
+            cm_msgs,
+            fo_msgs,
+            cd_msgs,
+            msg_line,
+            start_date,
+            end_date,
+            comments
+        FROM ctcl_message_ratio
+        ORDER BY exchange_ip, start_date
+    """)
+
+    records = cursor.fetchall()
+
+    cursor.close()
+    connection.close()
+
+    return records
 # ==========================================================
 # DASHBOARD STATISTICS
 # ==========================================================
@@ -953,6 +995,38 @@ def get_audit_logs():
 
     cursor.close()
 
+    connection.close()
+
+    return logs
+
+# ==========================================================
+# GET ALL AUDIT LOGS
+# ==========================================================
+
+# ==========================================================
+# GET ALL AUDIT LOGS
+# ==========================================================
+
+def get_all_audit_logs():
+
+    connection, cursor = get_cursor()
+
+    cursor.execute("""
+        SELECT
+            id,
+            username,
+            source,
+            module,
+            action,
+            description,
+            created_at
+        FROM audit_logs
+        ORDER BY created_at DESC
+    """)
+
+    logs = cursor.fetchall()
+
+    cursor.close()
     connection.close()
 
     return logs

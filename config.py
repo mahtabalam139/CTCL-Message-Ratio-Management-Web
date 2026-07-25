@@ -4,7 +4,7 @@
 # ==========================================================
 
 EXCEL_FILE = (
-    r"file name"
+    r"C:\Users\Mahtab\Documents\CTCL_TOOL\data\CTCL-Jul-2026.xlsx"
 )
 
 BACKUP_FOLDER = "backup"
@@ -17,12 +17,12 @@ APP_VERSION = "1.0"
 # MYSQL CONFIGURATION
 # ==========================================================
 
-DB_HOST = "******"
+DB_HOST = "127.0.0.1"
 
 DB_PORT = 3306
 
-DB_NAME = "*****" 
+DB_NAME = "ctcl_db" 
 
-DB_USER = "**" 
+DB_USER = "root" 
 
-DB_PASSWORD = "****"
+DB_PASSWORD = "ctcl_2026"
