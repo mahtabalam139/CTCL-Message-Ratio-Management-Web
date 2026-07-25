@@ -1,0 +1,94 @@
+<div class="card shadow-sm">
+
+    <div class="card-header bg-danger text-white">
+
+        <h5 class="mb-0">
+
+            Disable User
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="alert alert-warning">
+
+            <strong>Warning!</strong>
+
+            This user will not be able to login until the account is enabled again.
+
+        </div>
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th width="30%">Username</th>
+                <td>{{ user["username"] }}</td>
+            </tr>
+
+            <tr>
+                <th>Full Name</th>
+                <td>{{ user["full_name"] }}</td>
+            </tr>
+
+            <tr>
+                <th>Role</th>
+                <td>{{ user["role"] }}</td>
+            </tr>
+
+            <tr>
+                <th>Status</th>
+                <td>
+
+                    {% if user["is_active"] == 1 %}
+
+                        Active
+
+                    {% else %}
+
+                        Disabled
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+        </table>
+
+        <div class="text-end">
+
+            <a
+                href="/users"
+                class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+            <form
+                method="post"
+                action="/confirm-disable-user"
+                style="display:inline;">
+
+                <input
+                    type="hidden"
+                    name="username"
+                    value="{{ user['username'] }}">
+
+                <button
+                    type="submit"
+                    class="btn btn-danger">
+
+                    Disable User
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

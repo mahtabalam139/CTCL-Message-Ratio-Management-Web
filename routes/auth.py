@@ -1,4 +1,5 @@
 
+from db_handler import insert_audit_log
 from fastapi import APIRouter
 from fastapi import Form
 from fastapi import Request
@@ -60,17 +61,56 @@ def login(
     request.session["role"] = user["role"]
 
     request.session["full_name"] = user["full_name"]
+    
+    insert_audit_log(
+
+    user["username"],
+
+    "WEB",
+
+    "Login",
+
+    "Login",
+
+    f"User '{user['username']}' logged in."
+
+)
 
     return RedirectResponse(
         "/dashboard",
         status_code=302
     )
 @router.get("/logout")
-def logout(request: Request):
+def logout(
+    request: Request
+):
+
+    username = request.session.get(
+        "user"
+    )
+
+    if username:
+
+        insert_audit_log(
+
+            username,
+
+            "WEB",
+
+            "Login",
+
+            "Logout",
+
+            f"User '{username}' logged out."
+
+        )
 
     request.session.clear()
 
     return RedirectResponse(
+
         "/",
+
         status_code=302
+
     )

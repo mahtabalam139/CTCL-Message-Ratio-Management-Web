@@ -1,0 +1,135 @@
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-success text-white">
+
+            <h5 class="mb-0">
+
+                Revision Preview
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <tr>
+                    <th width="30%">Field</th>
+                    <th>Current</th>
+                    <th>New</th>
+                </tr>
+
+                <tr>
+                    <td>Scenario</td>
+                    <td>{{ current_record["Scenario"] }}</td>
+                    <td>{{ record["Scenario"] }}</td>
+                </tr>
+
+                <tr>
+                    <td>CM Msg</td>
+                    <td>{{ current_record["CM Msgs"] }}</td>
+                    <td>{{ record["CM Msgs"] }}</td>
+                </tr>
+
+                <tr>
+                    <td>FO Msg</td>
+                    <td>{{ current_record["Fo Msgs"] }}</td>
+                    <td>{{ record["Fo Msgs"] }}</td>
+                </tr>
+
+                <tr>
+                    <td>CD Msg</td>
+                    <td>{{ current_record["CD Msgs"] }}</td>
+                    <td>{{ record["CD Msgs"] }}</td>
+                </tr>
+
+                <tr>
+                    <td>Msg Line</td>
+                    <td>{{ current_record["Msg Line"] }}</td>
+                    <td>{{ record["Msg Line"] }}</td>
+                </tr>
+                <tr>
+                    <td>Start Date</td>
+                    <td>{{ current_record["Start Date"] }}</td>
+                    <td>{{ record["Start Date"] }}</td>
+                </tr>
+
+                <tr>
+                    <td>End Date</td>
+                    <td>{{ current_record["End Date"] }}</td>
+                    <td>{{ record["End Date"] }}</td>
+                </tr>
+                <tr>
+                    <td>Comments</td>
+                    <td>{{ current_record["Comments"] }}</td>
+                    <td>{{ record["Comments"] }}</td>
+                </tr>
+
+            </table>
+
+    <div class="text-end">
+
+        <a
+            href="/revision/{{ record['id'] }}"
+            class="btn btn-secondary">
+
+            Back
+
+        </a>
+
+        <form
+            method="post"
+            action="/confirm-revision"
+            style="display:inline;">
+
+            <input
+                type="hidden"
+                name="record_id"
+                value="{{ record['id'] }}">
+
+            <input
+                type="hidden"
+                name="scenario"
+                value="{{ record['Scenario'] }}">
+
+            <input
+                type="hidden"
+                name="cm_msg"
+                value="{{ record['CM Msgs'] }}">
+
+            <input
+                type="hidden"
+                name="fo_msg"
+                value="{{ record['Fo Msgs'] }}">
+
+            <input
+                type="hidden"
+                name="cd_msg"
+                value="{{ record['CD Msgs'] }}">
+
+            <input
+                type="hidden"
+                name="msg_line"
+                value="{{ record['Msg Line'] }}">
+
+            <input
+                type="hidden"
+                name="comments"
+                value="{{ record['Comments'] }}">
+            <input
+                type="hidden"
+                name="start_date"
+                value="{{ record['Start Date'] }}">
+
+            <button
+                type="submit"
+                class="btn btn-success">
+
+                Confirm Revision
+
+            </button>
+
+        </form>
+
+    </div>

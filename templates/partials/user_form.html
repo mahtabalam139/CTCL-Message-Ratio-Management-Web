@@ -1,0 +1,131 @@
+<div class="card shadow-sm">
+
+    <div class="card-header bg-success text-white">
+
+        <h5 class="mb-0">
+
+            Add New User
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        {% if error %}
+
+        <div class="alert alert-danger">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+        <form
+            method="post"
+            action="/add-user">
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Username
+
+                    </label>
+
+                    <input
+                        type="text"
+                        name="username"
+                        class="form-control"
+                        value="{{ user.username if user else '' }}"
+                        required>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Full Name
+
+                    </label>
+
+                    <input
+                        type="text"
+                        name="full_name"
+                        class="form-control"
+                        value="{{ user.full_name if user else '' }}"
+                        required>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Password
+
+                    </label>
+
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control"
+                        required>
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label class="form-label">
+
+                        Role
+
+                    </label>
+
+                    <select
+                        name="role"
+                        class="form-select">
+
+                        <option value="Admin">Admin</option>
+
+                        <option value="User">User</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="text-end">
+
+                <a
+                    href="/users"
+                    class="btn btn-secondary">
+
+                    Cancel
+
+                </a>
+
+                <button
+                    type="submit"
+                    class="btn btn-success">
+
+                    Preview
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,122 @@
+<div class="card shadow-sm">
+
+    <div class="card-header bg-primary text-white">
+
+        <h5 class="mb-0">
+
+            User Preview
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <table class="table table-bordered">
+
+            <tr>
+
+                <th width="30%">
+
+                    Username
+
+                </th>
+
+                <td>
+
+                    {{ user.username }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Full Name
+
+                </th>
+
+                <td>
+
+                    {{ user.full_name }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Role
+
+                </th>
+
+                <td>
+
+                    {{ user.role }}
+
+                </td>
+
+            </tr>
+
+        </table>
+
+        <div class="alert alert-warning">
+
+            Password will be securely encrypted before saving.
+
+        </div>
+
+        <div class="text-end">
+
+            <a
+                href="/add-user"
+                class="btn btn-secondary">
+
+                Back
+
+            </a>
+
+            <form
+                method="post"
+                action="/confirm-user"
+                style="display:inline;">
+
+                <input
+                    type="hidden"
+                    name="username"
+                    value="{{ user.username }}">
+
+                <input
+                    type="hidden"
+                    name="full_name"
+                    value="{{ user.full_name }}">
+
+                <input
+                    type="hidden"
+                    name="password"
+                    value="{{ user.password }}">
+
+                <input
+                    type="hidden"
+                    name="role"
+                    value="{{ user.role }}">
+
+                <button
+                    type="submit"
+                    class="btn btn-success">
+
+                    Confirm User
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

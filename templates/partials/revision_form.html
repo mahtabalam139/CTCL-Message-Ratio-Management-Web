@@ -1,4 +1,3 @@
-
 {% if error %}
 
 <div class="alert alert-danger">
@@ -8,6 +7,7 @@
 </div>
 
 {% endif %}
+
 <div class="card shadow-sm">
 
     <div class="card-header bg-warning">
@@ -22,10 +22,10 @@
 
     <div class="card-body">
 
-            <form
-                method="post"
-                action="/revision/{{ record['id'] }}"
-            >
+        <form
+            method="post"
+            action="/revision/{{ record['id'] }}"
+        >
 
             <input
                 type="hidden"
@@ -46,8 +46,10 @@
                     <input
                         type="text"
                         class="form-control"
+                        id="scenario"
                         name="scenario"
                         value="{{ record['Scenario'] }}"
+                        readonly
                     >
 
                 </div>
@@ -134,7 +136,48 @@
             </div>
 
             <br>
+            <br>
 
+<div class="row">
+
+    <div class="col-md-6">
+
+        <label class="form-label">
+
+            Effective Start Date
+
+        </label>
+
+        <input
+            type="date"
+            class="form-control"
+            id="start_date"
+            name="start_date"
+        >
+
+    </div>
+
+    <div class="col-md-6">
+
+        <label class="form-label">
+
+            New End Date
+
+        </label>
+
+        <input
+            type="text"
+            class="form-control"
+            id="end_date"
+            name="end_date"
+            readonly
+        >
+
+    </div>
+
+</div>
+
+<br>
             <label class="form-label">
 
                 Comments
@@ -176,3 +219,94 @@
     </div>
 
 </div>
+
+<script>
+
+function updateScenario() {
+
+    const cm = parseInt(document.getElementById("cm_msg").value) || 0;
+    const fo = parseInt(document.getElementById("fo_msg").value) || 0;
+    const cd = parseInt(document.getElementById("cd_msg").value) || 0;
+
+    const total = cm + fo + cd;
+
+    document.getElementById("msg_line").value = total;
+
+    let scenario = "";
+
+    switch (total) {
+
+        case 40:
+            scenario = "A2";
+            break;
+
+        case 100:
+            scenario = "B1";
+            break;
+
+        case 200:
+            scenario = "C1";
+            break;
+
+        case 400:
+            scenario = "D1";
+            break;
+
+        case 1000:
+            scenario = "E1";
+            break;
+
+        default:
+            scenario = "";
+    }
+
+    document.getElementById("scenario").value = scenario;
+
+}
+
+document.getElementById("cm_msg")
+.addEventListener("input", updateScenario);
+
+document.getElementById("fo_msg")
+.addEventListener("input", updateScenario);
+
+document.getElementById("cd_msg")
+.addEventListener("input", updateScenario);
+
+
+
+function updateEndDate() {
+
+    const start = document.getElementById("start_date").value;
+
+    if (!start)
+        return;
+
+    const d = new Date(start);
+
+    const lastDay = new Date(
+        d.getFullYear(),
+        d.getMonth() + 1,
+        0
+    );
+
+    const day = String(lastDay.getDate()).padStart(2, "0");
+
+    const month = String(lastDay.getMonth() + 1).padStart(2, "0");
+
+    const year = lastDay.getFullYear();
+
+    document.getElementById("end_date").value =
+        day + "-" + month + "-" + year;
+
+}
+
+document
+.getElementById("start_date")
+.addEventListener("change", updateEndDate);
+
+updateScenario();
+
+updateEndDate();
+
+</script>

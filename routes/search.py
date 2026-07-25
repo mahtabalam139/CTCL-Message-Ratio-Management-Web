@@ -1,4 +1,3 @@
-
 from fastapi import APIRouter
 from fastapi import Request
 from fastapi import Form
@@ -8,17 +7,15 @@ from fastapi.templating import Jinja2Templates
 
 from services.search_service import get_search_result
 
-
 router = APIRouter()
 
 templates = Jinja2Templates(
     directory="templates"
 )
 
-
 @router.get("/search")
 def search_page(
-        request: Request
+    request: Request
 ):
 
     if "user" not in request.session:
@@ -28,27 +25,40 @@ def search_page(
             status_code=302
         )
 
+    success_message = request.session.pop(
+    "success_message",
+    None
+    )
+
+    error_message = request.session.pop(
+        "error_message",
+        None
+    )
+
     return templates.TemplateResponse(
         request,
         "search.html",
         {
-            "request": request,
-            "title": "Search Records",
+        "request": request,
+        "title": "Search Records",
 
-            "latest": None,
-            "history": [],
+        "latest": None,
+        "history": [],
 
-            "search_type": "",
-            "search_value": ""
+        "search_type": "",
+        "search_value": "",
+
+        "success_message": success_message,
+        "error_message": error_message
         }
     )
 
 
 @router.post("/search")
 def search_record(
-        request: Request,
-        search_type: str = Form(...),
-        search_value: str = Form(...)
+    request: Request,
+    search_type: str = Form(...),
+    search_value: str = Form(...)
 ):
 
     if "user" not in request.session:
@@ -57,6 +67,16 @@ def search_record(
             "/",
             status_code=302
         )
+
+    success_message = request.session.pop(
+        "success_message",
+        None
+    )
+
+    error_message = request.session.pop(
+        "error_message",
+        None
+    )
 
     latest_record, history = get_search_result(
         search_type,
@@ -69,11 +89,11 @@ def search_record(
         {
             "request": request,
             "title": "Search Records",
-
             "latest": latest_record,
             "history": history,
-
             "search_type": search_type,
-            "search_value": search_value
+            "search_value": search_value,
+            "success_message": success_message,
+            "error_message": error_message
         }
     )

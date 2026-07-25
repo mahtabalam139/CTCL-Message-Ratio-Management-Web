@@ -1,0 +1,117 @@
+<div class="card shadow-sm">
+
+    <div class="card-header bg-danger text-white">
+
+        <h5 class="mb-0">
+
+            Delete Record Preview
+
+        </h5>
+
+    </div>
+
+    <div class="card-body">
+
+        <div class="alert alert-warning">
+
+            <strong>Warning!</strong>
+
+            You are about to delete the latest active CTCL record.
+            The previous revision will automatically become active again.
+
+        </div>
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th width="35%">Field</th>
+                <th>Value</th>
+            </tr>
+
+            <tr>
+                <td>Exchange IP</td>
+                <td>{{ record["exchange_ip"] }}</td>
+            </tr>
+
+            <tr>
+                <td>Dealer ID</td>
+                <td>{{ record["dealer_id"] }}</td>
+            </tr>
+
+            <tr>
+                <td>Scenario</td>
+                <td>{{ record["scenario"] }}</td>
+            </tr>
+
+            <tr>
+                <td>CM Msg</td>
+                <td>{{ record["cm_msgs"] }}</td>
+            </tr>
+
+            <tr>
+                <td>FO Msg</td>
+                <td>{{ record["fo_msgs"] }}</td>
+            </tr>
+
+            <tr>
+                <td>CD Msg</td>
+                <td>{{ record["cd_msgs"] }}</td>
+            </tr>
+
+            <tr>
+                <td>Msg Line</td>
+                <td>{{ record["msg_line"] }}</td>
+            </tr>
+
+            <tr>
+                <td>Start Date</td>
+                <td>{{ record["start_date"] }}</td>
+            </tr>
+
+            <tr>
+                <td>End Date</td>
+                <td>{{ record["end_date"] }}</td>
+            </tr>
+
+            <tr>
+                <td>Comments</td>
+                <td>{{ record["comments"] }}</td>
+            </tr>
+
+        </table>
+
+        <div class="text-end">
+
+    <a
+        href="/search"
+        class="btn btn-secondary">
+
+        Cancel
+
+    </a>
+
+    <form
+        method="post"
+        action="/confirm-delete"
+        style="display:inline;">
+
+        <input
+            type="hidden"
+            name="record_id"
+            value="{{ record['id'] }}">
+
+        <button
+            type="submit"
+            class="btn btn-danger">
+
+            Confirm Delete
+
+        </button>
+
+    </form>
+
+</div>
+
+        </div>
+
+    </div>

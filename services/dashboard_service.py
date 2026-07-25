@@ -1,23 +1,23 @@
-from excel_handler import load_data
-
+from db_handler import (
+    get_total_records,
+    get_active_records,
+    get_total_users,
+    get_total_revisions,
+    get_recent_revisions
+)
 
 def get_dashboard_summary():
 
-    df = load_data()
-
-    total_records = len(df)
-
-    active_records = len(
-        df[df["End Date"].notna()]
-    )
-
-    total_users = 0
-
-    today_revisions = 0
-
     return {
-        "total_records": total_records,
-        "active_records": active_records,
-        "total_users": total_users,
-        "today_revisions": today_revisions
+
+        "total_records": get_total_records(),
+
+        "active_records": get_active_records(),
+
+        "total_users": get_total_users(),
+
+        "today_revisions": get_total_revisions(),
+
+        "recent_revisions": get_recent_revisions()
+
     }

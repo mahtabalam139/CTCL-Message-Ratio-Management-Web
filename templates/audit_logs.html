@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+    <div class="row mb-3">
+
+        <div class="col">
+
+            <h3>
+
+                Audit Logs
+
+            </h3>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-header bg-dark text-white">
+
+            <h5 class="mb-0">
+
+                System Audit Logs
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if logs %}
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover table-sm align-middle">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th width="70">User</th>
+
+                            <th width="70">Source</th>
+
+                            <th width="140">Module</th>
+
+                            <th width="150">Action</th>
+
+                            <th>Description</th>
+
+                            <th width="170">Date & Time</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for log in logs %}
+
+                        <tr>
+
+                            <td>
+
+                                {{ log.username }}
+
+                            </td>
+
+                            <td>
+
+                                {% if log.source == "WEB" %}
+
+                                <span class="badge bg-primary">
+
+                                    WEB
+
+                                </span>
+
+                                {% elif log.source == "GUI" %}
+
+                                <span class="badge bg-success">
+
+                                    GUI
+
+                                </span>
+
+                                {% else %}
+
+                                <span class="badge bg-secondary">
+
+                                    N/A
+
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                            <td>
+
+                                {{ log.module }}
+
+                            </td>
+
+                            <td>
+
+                                {{ log.action }}
+
+                            </td>
+
+                            <td>
+
+                                {{ log.description }}
+
+                            </td>
+
+                            <td>
+
+                                {{ log.created_at }}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-info mb-0">
+
+                No audit logs found.
+
+            </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
