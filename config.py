@@ -21,8 +21,8 @@ DB_HOST = "127.0.0.1"
 
 DB_PORT = 3306
 
-DB_NAME = "ctcl_db" 
+DB_NAME = "****" 
 
-DB_USER = "root" 
+DB_USER = "****" 
 
-DB_PASSWORD = "ctcl_2026"
+DB_PASSWORD = "*****"
