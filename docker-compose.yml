@@ -1,17 +1,33 @@
-version: "3.9"
-
 services:
 
-  ctcl-web:
+  mysql:
+    image: mysql:8.0
+    container_name: ctcl-mysql
+    restart: always
 
+    environment:
+      MYSQL_ROOT_PASSWORD: ctcl_2026
+      MYSQL_DATABASE: ctcl_db
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  ctcl-web:
     build: .
 
     container_name: ctcl-web
 
-    ports:
-      - "8000:8000"
+    depends_on:
+      - mysql
 
     env_file:
       - .env
 
-    restart: unless-stopped
+    ports:
+      - "8000:8000"
+
+volumes:
+  mysql_data:
