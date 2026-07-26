@@ -74,14 +74,6 @@ def revision_preview(
             status_code=302
         )
 
-    # print("\n========== FORM DATA ==========")
-    # print("Scenario :", scenario)
-    # print("CM :", cm_msg)
-    # print("FO :", fo_msg)
-    # print("CD :", cd_msg)
-    # print("Msg Line :", msg_line)
-    # print("Comments :", repr(comments))
-    # print("===============================\n")
 
     result = preview_revision(
         record_id=record_id,
@@ -93,10 +85,8 @@ def revision_preview(
         comments=comments,
         start_date=start_date
     )
-
-    # print("\n========== RESULT ==========")
     print(result)
-    # print("============================\n")
+
 
     return templates.TemplateResponse(
         request,

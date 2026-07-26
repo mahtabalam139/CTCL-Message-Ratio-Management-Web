@@ -13,7 +13,7 @@ from db_handler import (
 def get_delete_record(
     record_id
 ):
-    print("RECORD ID =", record_id)
+    # print("RECORD ID =", record_id)
 
     record = get_record_by_id(
         record_id
@@ -21,11 +21,11 @@ def get_delete_record(
 
     if record is None:
 
-        print("RECORD NOT FOUND")
+        # print("RECORD NOT FOUND")
 
         return None
 
-    print("RECORD FOUND")
+    # print("RECORD FOUND")
 
     return record
 
@@ -54,7 +54,7 @@ def confirm_delete(record_id):
 
     if len(history) < 2:
 
-        print("DELETE BLOCKED : Only one revision exists.")
+        # print("DELETE BLOCKED : Only one revision exists.")
 
         return "Cannot delete the only active revision."
 
@@ -62,7 +62,7 @@ def confirm_delete(record_id):
 
     if latest_record["id"] != record_id:
 
-        print("DELETE BLOCKED : Not latest revision.")
+        # print("DELETE BLOCKED : Not latest revision.")
 
         return "Only the latest active revision can be deleted."
 
@@ -80,6 +80,6 @@ def confirm_delete(record_id):
 
     delete_record(record_id)
 
-    print("DELETE COMPLETED")
+    # print("DELETE COMPLETED")
     
     return None

@@ -12,8 +12,8 @@ def login_user(
         password
     )
 
-    print("USERNAME =", username)
-    print("PASSWORD =", password)
-    print("USER =", user)
+    # print("USERNAME =", username)
+    # print("PASSWORD =", password)
+    # print("USER =", user)
 
     return user

@@ -14,11 +14,11 @@ from db_handler import (
 
 def get_users():
 
-    print("\n========== USERS ==========")
+    # print("\n========== USERS ==========")
 
     users = get_all_users()
 
-    print("TOTAL USERS =", len(users))
+    # print("TOTAL USERS =", len(users))
 
     return users
 # ==========================================================
@@ -92,15 +92,15 @@ def save_user(user):
 
     )
 
-    print("USER SAVED SUCCESSFULLY")
+    # print("USER SAVED SUCCESSFULLY")
 # ==========================================================
 # GET USER
 # ==========================================================
 
 def get_user(username):
 
-    print("\n========== GET USER ==========")
-    print("USERNAME =", username)
+    # print("\n========== GET USER ==========")
+    # print("USERNAME =", username)
 
     user = get_user_by_username(
         username
@@ -108,11 +108,11 @@ def get_user(username):
 
     if user is None:
 
-        print("USER NOT FOUND")
+        # print("USER NOT FOUND")
 
         return None
 
-    print("USER FOUND")
+    # print("USER FOUND")
 
     return user
 
@@ -180,14 +180,14 @@ def save_updated_user(
 
     )
 
-    print("USER UPDATED SUCCESSFULLY")
+    # print("USER UPDATED SUCCESSFULLY")
 # ==========================================================
 # GET DISABLE USER
 # ==========================================================
 
 def get_disable_user(username):
 
-    print("\n========== DISABLE USER ==========")
+    # print("\n========== DISABLE USER ==========")
     print("USERNAME =", username)
 
     user = get_user_by_username(
@@ -196,11 +196,11 @@ def get_disable_user(username):
 
     if user is None:
 
-        print("USER NOT FOUND")
+        # print("USER NOT FOUND")
 
         return None
 
-    print("USER FOUND")
+    # print("USER FOUND")
 
     return user
 
@@ -211,11 +211,11 @@ def get_disable_user(username):
 
 def disable_user(username):
 
-    print("\n========== CONFIRM DISABLE ==========")
-    print("USERNAME =", username)
+    # print("\n========== CONFIRM DISABLE ==========")
+    # print("USERNAME =", username)
 
     disable_user_account(
         username
     )
 
-    print("USER DISABLED SUCCESSFULLY")
+    # print("USER DISABLED SUCCESSFULLY")

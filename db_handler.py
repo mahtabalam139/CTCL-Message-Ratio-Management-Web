@@ -842,8 +842,8 @@ def get_revision_history(exchange_ip):
 
     records = cursor.fetchall()
 
-    print("REVISION HISTORY =", records)
-    print("TOTAL REVISIONS =", len(records))
+    # print("REVISION HISTORY =", records)
+    # print("TOTAL REVISIONS =", len(records))
 
     cursor.close()
     connection.close()

@@ -9,18 +9,18 @@ from db_handler import (
 
 def get_reset_user(username):
 
-    print("\n========== GET USER ==========")
-    print("USERNAME =", username)
+    # print("\n========== GET USER ==========")
+    # print("USERNAME =", username)
 
     user = get_user_by_username(username)
 
     if user is None:
 
-        print("USER NOT FOUND")
+        # print("USER NOT FOUND")
 
         return None
 
-    print("USER FOUND")
+    # print("USER FOUND")
 
     return user
 
