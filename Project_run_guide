@@ -1,1 +1,84 @@
+1. Launch EC2
+  Security Group:
+  22 SSH
+  8000 Application Access
+  3306 MySQL (optional)
 
+2. Connect to EC2
+  ssh -i key.pem ubuntu@<PUBLIC-IP>
+
+3. Install Docker
+  sudo apt update
+  sudo apt install docker.io docker-compose-v2 -y
+  sudo systemctl enable docker
+  sudo systemctl start docker
+  sudo usermod -aG docker ubuntu
+  docker --version
+  docker compose version
+
+4. Clone Repository
+  git clone <YOUR_GITHUB_REPO_URL>
+  cd CTCL-Message-Ratio-Management-Web
+
+5. Create .env
+  cp .env.example .env
+  DB_HOST=mysql
+  DB_PORT=3306
+  DB_NAME=ctcl_db
+  DB_USER=root
+  DB_PASSWORD=ctcl_2026
+  SECRET_KEY=CTCL_FASTAPI_SECRET_2026
+
+6. Verify docker-compose.yml
+  ports:
+  - "3306:3306"
+  ports:
+  - "8000:8000"
+
+7. Start Containers
+  docker compose up --build -d
+  docker ps
+  Expecetd- ctcl-mysql
+  ctcl-web
+
+8. Import Database
+  sql/ctcl_db_backup.sql
+  docker exec -i ctcl-mysql mysql -uroot -pctcl_2026 ctcl_db < sql/ctcl_db_backup.sql
+  docker exec -it ctcl-mysql mysql -uroot -pctcl_2026
+  USE ctcl_db;
+  SHOW TABLES;
+Expected:
+  Plain Text
+  audit_logs
+  ctcl_message_ratio
+  users
+  SELECT username FROM users; -- expected admin
+  exit;
+
+9. Verify Application
+  http://<EC2-PUBLIC-IP>:8000
+  Username : admin
+  Password : admin123
+
+10. Check Logs
+  docker logs -f ctcl-web -- expected Application startup complete
+
+11. Useful Commands
+  docker compose down
+  docker compose up -d
+  docker compose up --build -d
+  docker ps
+  docker logs -f ctcl-web
+  docker logs -f ctcl-mysql
+
+One-Time Improvement (Recommended)
+  mysql:
+  image: mysql:8.0
+
+  environment:
+    MYSQL_ROOT_PASSWORD: ctcl_2026
+    MYSQL_DATABASE: ctcl_db
+
+  volumes:
+    - mysql_data:/var/lib/mysql
+    - ./sql/ctcl_db_backup.sql:/docker-entrypoint-initdb.d/ctcl_db_backup.sql
