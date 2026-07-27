@@ -3,6 +3,7 @@ from fastapi import Request
 from fastapi import Form
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
+from services.auth_helper import require_admin
 
 from services.user_service import (
 
@@ -29,16 +30,12 @@ templates = Jinja2Templates(
 # ==========================================================
 
 @router.get("/users")
-def users_page(
-    request: Request
-):
+def users_page(request: Request):
 
-    if "user" not in request.session:
+    result = require_admin(request)
 
-        return RedirectResponse(
-            "/",
-            status_code=302
-        )
+    if result:
+        return result
 
     users = get_users()
 
@@ -56,16 +53,12 @@ def users_page(
 # ==========================================================
 
 @router.get("/add-user")
-def add_user_page(
-    request: Request
-):
+def add_user_page(request: Request):
 
-    if "user" not in request.session:
+    result = require_admin(request)
 
-        return RedirectResponse(
-            "/",
-            status_code=302
-        )
+    if result:
+        return result
 
     return templates.TemplateResponse(
         request,
@@ -94,12 +87,10 @@ def add_user_preview(
 
 ):
 
-    if "user" not in request.session:
+    result = require_admin(request)
 
-        return RedirectResponse(
-            "/",
-            status_code=302
-        )
+    if result:
+        return result
 
     result = preview_user(
 
@@ -142,12 +133,10 @@ def confirm_user(
 
 ):
 
-    if "user" not in request.session:
+    result = require_admin(request)
 
-        return RedirectResponse(
-            "/",
-            status_code=302
-        )
+    if result:
+        return result
 
     user = request.session.get(
         "user_preview"
@@ -190,12 +179,10 @@ def edit_user_page(
 
 ):
 
-    if "user" not in request.session:
+    result = require_admin(request)
 
-        return RedirectResponse(
-            "/",
-            status_code=302
-        )
+    if result:
+        return result
 
     user = get_user(username)
 
@@ -244,12 +231,10 @@ def edit_user_preview(
 
 ):
 
-    if "user" not in request.session:
+    result = require_admin(request)
 
-        return RedirectResponse(
-            "/",
-            status_code=302
-        )
+    if result:
+        return result
 
     result = preview_update_user(
 
@@ -297,12 +282,10 @@ def confirm_edit_user(
 
 ):
 
-    if "user" not in request.session:
+    result = require_admin(request)
 
-        return RedirectResponse(
-            "/",
-            status_code=302
-        )
+    if result:
+        return result
 
     user = request.session.get(
         "edit_user"
@@ -345,12 +328,10 @@ def disable_user_page(
 
 ):
 
-    if "user" not in request.session:
+    result = require_admin(request)
 
-        return RedirectResponse(
-            "/",
-            status_code=302
-        )
+    if result:
+        return result
 
     user = get_disable_user(
         username
@@ -395,12 +376,10 @@ def confirm_disable_user(
 
 ):
 
-    if "user" not in request.session:
+    result = require_admin(request)
 
-        return RedirectResponse(
-            "/",
-            status_code=302
-        )
+    if result:
+        return result
 
     disable_user(
         username

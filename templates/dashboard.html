@@ -1,3 +1,5 @@
+{% set user = request.session.get("user") %}
+
 {% extends "base.html" %}
 
 {% block content %}
@@ -178,14 +180,21 @@
 
             </div>
 
-            <div class="col-lg-3 col-md-6">
+                {% if user and user["role"] == "Admin" %}
 
-                <a href="/users" class="btn btn-warning w-100">
-                    <i class="bi bi-people"></i>
-                    User Management
-                </a>
+                <div class="col-lg-3 col-md-6">
 
-            </div>
+                    <a href="/users" class="btn btn-warning w-100">
+
+                        <i class="bi bi-people"></i>
+
+                        User Management
+
+                    </a>
+
+                </div>
+
+                {% endif %}
 
         </div>
 

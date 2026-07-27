@@ -146,7 +146,7 @@ def confirm_revision(
     # print("======================================")
     print("START DATE =", start_date)
     print(type(start_date))
-    username = request.session["user"]
+    username = request.session["user"]["username"]
     save_revision(
     username=username,
 
