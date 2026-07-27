@@ -82,3 +82,13 @@ One-Time Improvement (Recommended)
   volumes:
     - mysql_data:/var/lib/mysql
     - ./sql/ctcl_db_backup.sql:/docker-entrypoint-initdb.d/ctcl_db_backup.sql
+
+===============================================================
+git clone <repo>
+cd CTCL-Message-Ratio-Management-Web
+cp .env.example .env
+docker compose up --build -d
+sleep 30
+docker exec -i ctcl-mysql mysql -uroot -pctcl_2026 ctcl_db < sql/ctcl_db_backup.sql
+docker restart ctcl-web
+
