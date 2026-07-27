@@ -3,20 +3,18 @@
     <div class="logo">
 
         <h3>
-
             CTCL
-
         </h3>
 
     </div>
+
+    {% set user = request.session.get("user") %}
 
     <ul class="nav flex-column mt-4">
 
         <li class="nav-item">
 
-            <a
-                href="/dashboard"
-                class="nav-link">
+            <a href="/dashboard" class="nav-link">
 
                 <i class="bi bi-speedometer2"></i>
 
@@ -28,9 +26,7 @@
 
         <li class="nav-item">
 
-            <a
-                href="/search"
-                class="nav-link">
+            <a href="/search" class="nav-link">
 
                 <i class="bi bi-search"></i>
 
@@ -42,9 +38,7 @@
 
         <li class="nav-item">
 
-            <a
-                href="/search"
-                class="nav-link">
+            <a href="/search" class="nav-link">
 
                 <i class="bi bi-pencil-square"></i>
 
@@ -54,11 +48,11 @@
 
         </li>
 
+        {% if user and user["role"] == "Admin" %}
+
         <li class="nav-item">
 
-            <a
-                href="/users"
-                class="nav-link">
+            <a href="/users" class="nav-link">
 
                 <i class="bi bi-people"></i>
 
@@ -70,22 +64,21 @@
 
         <li class="nav-item">
 
-            <a href="/audit"
-                class="nav-link">
+            <a href="/audit" class="nav-link">
 
-                    <i class="bi bi-clock-history"></i>
+                <i class="bi bi-clock-history"></i>
 
-                    Audit Logs
+                Audit Logs
 
-                </a>
+            </a>
 
         </li>
 
+        {% endif %}
+
         <li class="nav-item">
 
-            <a
-                href="/reports"
-                class="nav-link">
+            <a href="/reports" class="nav-link">
 
                 <i class="bi bi-bar-chart"></i>
 

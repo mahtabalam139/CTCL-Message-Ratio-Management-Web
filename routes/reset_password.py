@@ -3,6 +3,7 @@ from fastapi import Request
 from fastapi import Form
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
+from services.auth_helper import require_admin
 
 from services.reset_password_service import (
     get_reset_user,
@@ -25,12 +26,10 @@ def reset_password_page(
     username: str
 ):
 
-    if "user" not in request.session:
+    result = require_admin(request)
 
-        return RedirectResponse(
-            "/",
-            status_code=302
-        )
+    if result:
+        return result
 
     user = get_reset_user(username)
 
@@ -65,12 +64,10 @@ def reset_password_preview(
     confirm_password: str = Form(...)
 ):
 
-    if "user" not in request.session:
+    result = require_admin(request)
 
-        return RedirectResponse(
-            "/",
-            status_code=302
-        )
+    if result:
+        return result
 
     result = preview_reset_password(
         username,
@@ -116,12 +113,10 @@ def confirm_password(
     request: Request
 ):
 
-    if "user" not in request.session:
+    result = require_admin(request)
 
-        return RedirectResponse(
-            "/",
-            status_code=302
-        )
+    if result:
+        return result
 
     data = request.session.get(
         "reset_password"

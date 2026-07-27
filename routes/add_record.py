@@ -1,5 +1,3 @@
-from urllib import request
-
 from fastapi import APIRouter
 from fastapi import Request
 from fastapi import Form
@@ -32,13 +30,14 @@ def add_record_page(request: Request):
         )
 
     data = get_add_page()
-
+    
     return templates.TemplateResponse(
         request,
         "add_record.html",
         {
             "request": request,
             "title": "Add Record",
+            "form_data": {},
             **data
         }
     )
@@ -47,44 +46,46 @@ def add_record_page(request: Request):
 # ==========================================================
 # ADD RECORD PREVIEW
 # ==========================================================
-
 @router.post("/add")
 def add_record_preview(
 
-    
     request: Request,
-    env: str = Form(...),
-    exchange: str = Form(...),
-    location: str = Form(...),
-    dedicated: str = Form(...),
-    system: str = Form(...),
-    server_ip: str = Form(...),
-    exchange_ip: str = Form(...),
-    fo_ctcl: str = Form(...),
-    cm_ctcl: str = Form(...),
-    cds_ctcl: str = Form(...),
-    dealer_id: str = Form(...),
-    rack: str = Form(...),
 
-    scenario: str = Form(...),
+    env: str = Form(""),
+    exchange: str = Form(""),
+    location: str = Form(""),
+    dedicated: str = Form(""),
+    system: str = Form(""),
+    server_ip: str = Form(""),
+    exchange_ip: str = Form(""),
+    fo_ctcl: str = Form(""),
+    cm_ctcl: str = Form(""),
+    cds_ctcl: str = Form(""),
+    dealer_id: str = Form(""),
+    rack: str = Form(""),
 
-    cm_msg: int = Form(...),
-    fo_msg: int = Form(...),
-    cd_msg: int = Form(...),
+    scenario: str = Form(""),
+
+    cm_msg: int = Form(0),
+    fo_msg: int = Form(0),
+    cd_msg: int = Form(0),
 
     msg_line: int = Form(0),
 
-    start_date: str = Form(...),
+    start_date: str = Form(""),
 
     comments: str = Form("")
 
 ):
+
     scenario_map = {
+
         "A2": 40,
         "B1": 100,
         "C1": 200,
         "D1": 400,
         "E1": 1000
+
     }
 
     msg_line = scenario_map.get(scenario, msg_line)
@@ -112,21 +113,56 @@ def add_record_preview(
         msg_line,
         start_date,
         comments
+
     )
+
+    form_data = {
+
+        "env": env,
+        "exchange": exchange,
+        "location": location,
+        "dedicated": dedicated,
+        "system": system,
+        "server_ip": server_ip,
+        "exchange_ip": exchange_ip,
+        "fo_ctcl": fo_ctcl,
+        "cm_ctcl": cm_ctcl,
+        "cds_ctcl": cds_ctcl,
+        "dealer_id": dealer_id,
+        "rack": rack,
+        "scenario": scenario,
+        "cm_msg": cm_msg,
+        "fo_msg": fo_msg,
+        "cd_msg": cd_msg,
+        "msg_line": msg_line,
+        "start_date": start_date,
+        "comments": comments
+
+    }
+
     if result.get("show_preview"):
+
         request.session["add_preview"] = result["preview"]
 
     return templates.TemplateResponse(
+
         request,
+
         "add_record.html",
+
         {
+
             "request": request,
             "title": "Add Record",
 
             "error": result.get("error"),
 
+            "form_data": form_data,
+
             **result
+
         }
+
     )
 # ==========================================================
 # CONFIRM ADD RECORD
@@ -142,7 +178,7 @@ def confirm_add_record(request: Request):
             "/add",
             status_code=302
         )
-    username = request.session["user"]
+    username = request.session["user"]["username"]
     save_add_record(
 
         username=username,

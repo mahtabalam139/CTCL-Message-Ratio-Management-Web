@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg bg-white shadow-sm px-4">
 
     <div class="container-fluid">
@@ -8,6 +7,8 @@
             CTCL Message Ratio Management Tool
 
         </h4>
+
+        {% set user = request.session.get("user") %}
 
         <div class="ms-auto d-flex align-items-center">
 
@@ -19,7 +20,7 @@
 
                 <strong>
 
-                    {{ request.session.get("full_name") }}
+                    {{ user["full_name"] if user else "" }}
 
                 </strong>
 

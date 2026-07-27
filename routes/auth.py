@@ -1,14 +1,13 @@
-
 from db_handler import insert_audit_log
+
 from fastapi import APIRouter
 from fastapi import Form
 from fastapi import Request
-
 from fastapi.responses import RedirectResponse
-
 from fastapi.templating import Jinja2Templates
 
 from services.auth_service import login_user
+
 
 router = APIRouter()
 
@@ -17,9 +16,13 @@ templates = Jinja2Templates(
 )
 
 
+# ==========================================================
+# LOGIN PAGE
+# ==========================================================
+
 @router.get("/")
 def login_page(
-        request: Request
+    request: Request
 ):
 
     return templates.TemplateResponse(
@@ -32,68 +35,93 @@ def login_page(
     )
 
 
+# ==========================================================
+# LOGIN
+# ==========================================================
+
 @router.post("/")
 def login(
-        request: Request,
-        username: str = Form(...),
-        password: str = Form(...)
+
+    request: Request,
+
+    username: str = Form(...),
+
+    password: str = Form(...)
+
 ):
 
     user = login_user(
+
         username,
+
         password
+
     )
 
     if user is None:
 
         return templates.TemplateResponse(
+
             request,
+
             "login.html",
+
             {
+
                 "request": request,
+
                 "title": "CTCL Login",
+
                 "error": "Invalid Username or Password"
+
             }
+
         )
 
-    request.session["user"] = user["username"]
+    # Store complete user object in session
+    request.session["user"] = user
 
-    request.session["role"] = user["role"]
-
-    request.session["full_name"] = user["full_name"]
-    
     insert_audit_log(
 
-    user["username"],
+        user["username"],
 
-    "WEB",
+        "WEB",
 
-    "Login",
+        "Login",
 
-    "Login",
+        "Login",
 
-    f"User '{user['username']}' logged in."
+        f"User '{user['username']}' logged in."
 
-)
+    )
 
     return RedirectResponse(
+
         "/dashboard",
+
         status_code=302
+
     )
+
+
+# ==========================================================
+# LOGOUT
+# ==========================================================
+
 @router.get("/logout")
 def logout(
+
     request: Request
+
 ):
 
-    username = request.session.get(
-        "user"
-    )
+    session_user = request.session.get("user")
 
-    if username:
+    if session_user:
 
         insert_audit_log(
 
-            username,
+            session_user["username"],
 
             "WEB",
 
@@ -101,7 +129,7 @@ def logout(
 
             "Logout",
 
-            f"User '{username}' logged out."
+            f"User '{session_user['username']}' logged out."
 
         )
 
